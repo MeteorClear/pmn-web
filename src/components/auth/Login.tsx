@@ -12,13 +12,35 @@ const Login = () => {
     const [error, setError] = useState<string>('');
 
     // form 변화에 따른 값 변화
+    const handleChange = () => {
+
+    };
 
     // 로그인 요청 (POST, /auth/login)
+    const handleSubmit = () => {
+
+    };
 
     return (
-        <>
-            <p>Login</p>
-            <form>id/pw/submit</form>
-        </>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    name="username"
+                    value={credentials.username}
+                    onChange={handleChange}
+                    placeholder="Email"
+                />
+                <input
+                    type="password"
+                    name="password"
+                    value={credentials.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                />
+                <button type="submit">Login</button>
+            </form>
+            {error && <p>{error}</p>}
+        </div>
     );
 };
