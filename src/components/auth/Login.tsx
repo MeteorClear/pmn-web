@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import apiClient from '../../api/apiClient';
+import getUserByUsername from '../user/UserFind';
 
 // 로그인 컴포넌트
 
@@ -22,8 +23,14 @@ const Login = () => {
         e.preventDefault();
 
         try {
+            // 로그인 시도
             const response = await apiClient.post('/auth/login', credentials);
+            // 로그인 성공 후 user 찾기
+            const user = await getUserByUsername(credentials.username);
+
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('userId', user.id);
+
             setError('');
             alert('login succeeded');
         } catch (error_) {
