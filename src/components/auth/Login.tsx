@@ -12,8 +12,8 @@ const Login = () => {
     const [error, setError] = useState<string>('');
 
     // form 변화에 따른 값 변화
-    const handleChange = () => {
-
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
 
     // 로그인 요청 (POST, /auth/login)
