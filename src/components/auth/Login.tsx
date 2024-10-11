@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import apiClient from '../../api/apiClient';
 
 // 로그인 컴포넌트
 
@@ -17,8 +18,17 @@ const Login = () => {
     };
 
     // 로그인 요청 (POST, /auth/login)
-    const handleSubmit = () => {
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
 
+        try {
+            const response = await apiClient.post('/auth/login', credentials);
+            localStorage.setItem('token', response.data.token);
+            setError('');
+            alert('login succeeded');
+        } catch (error_) {
+            setError('login failed');
+        }
     };
 
     return (
