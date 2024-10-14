@@ -11,7 +11,7 @@ interface JwtRequest {
 
 const Login = () => {
     const [credentials, setCredentials] = useState<JwtRequest>({ username: '', password: '' });
-    const [error, setError] = useState<string>('');
+    const [error, setError] = useState<string | null>(null);
 
     // form 변화에 따른 값 변화
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +31,7 @@ const Login = () => {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('userId', user.id);
 
-            setError('');
+            setError(null);
             alert('login succeeded');
         } catch (error_) {
             setError('login failed');
