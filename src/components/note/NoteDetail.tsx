@@ -8,7 +8,11 @@ interface Note {
     createdAt: string;
 }
 
-const NoteDetail = (noteId: number) => {
+interface NoteDetailProps {
+    noteId: number;
+}
+
+const NoteDetail = ({ noteId }: NoteDetailProps) => {
     const [note, setNote] = useState<Note | null>(null);
 
     // 노트 정보 Fetch
