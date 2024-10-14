@@ -18,6 +18,7 @@ const NoteList = () => {
         const fetchNotes = async () => {
             try {
                 const response = await apiClient.get(`/notes/user/${userId}`);
+                setNotes(response.data);
             } catch (error) {
                 console.error('[ERROR] NoteList.tsx ::', error);
             }
