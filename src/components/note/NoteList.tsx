@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
+import NoteDetail from "./NoteDetail";
 
 interface Note {
     id: number;
@@ -39,7 +40,7 @@ const NoteList = () => {
                 ))}
             </div>
             <div>
-                {selectedNote && selectedNote}
+                {selectedNote && <NoteDetail noteId={selectedNote} />}
             </div>
         </div>
     );
