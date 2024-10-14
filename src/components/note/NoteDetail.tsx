@@ -42,7 +42,7 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
                 {note.title}
             </div>
             <div>
-                {note.createdAt}
+                {new Date(note.createdAt).toLocaleDateString()}
             </div>
             <div>
                 {note.content}
