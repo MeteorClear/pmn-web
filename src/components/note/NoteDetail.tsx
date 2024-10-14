@@ -24,9 +24,27 @@ const NoteDetail = (noteId: number) => {
         fetchNote();
     }, [noteId]);
 
+    if (!note) {
+        return (
+            <>
+                loading
+            </>
+        )
+    }
+
     return (
         <div>
-            Note Detail ...
+            <div>
+                {note.title}
+            </div>
+            <div>
+                {note.createdAt}
+            </div>
+            <div>
+                {note.content}
+            </div>
         </div>
     );
 };
+
+export default NoteDetail;
