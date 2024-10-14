@@ -28,7 +28,12 @@ const NoteList = () => {
 
     return (
         <div>
-            Note List...
+            <p>Note List...</p>
+            {notes.map((note) => (
+                <div>
+                    {note.title}
+                </div>
+            ))}
         </div>
-    )
-}
+    );
+};
