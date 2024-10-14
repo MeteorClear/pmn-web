@@ -10,6 +10,7 @@ interface Note {
 
 const NoteList = () => {
     const [notes, setNotes] = useState<Note[]>([]);
+    const [selectedNote, setSelectedNote] = useState<number | null>(null);
     const userId = localStorage.getItem('userId');
 
     // 노트 목록 표시
@@ -28,12 +29,19 @@ const NoteList = () => {
 
     return (
         <div>
-            <p>Note List...</p>
-            {notes.map((note) => (
-                <div>
-                    {note.title}
-                </div>
-            ))}
+            <div>
+                <p>Note List...</p>
+                {notes.map((note) => (
+                    <div key={note.id} onClick={() => setSelectedNote(note.id)}>
+                        {note.title}
+                    </div>
+                ))}
+            </div>
+            <div>
+                {selectedNote && selectedNote}
+            </div>
         </div>
     );
 };
+
+export default NoteList;
