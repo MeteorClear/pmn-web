@@ -9,7 +9,11 @@ interface JwtRequest {
     password: string;
 };
 
-const Login = () => {
+interface LoginProps {
+    onLogin: () => void;
+}
+
+const Login = ({ onLogin }: LoginProps) => {
     const [credentials, setCredentials] = useState<JwtRequest>({ username: '', password: '' });
     const [error, setError] = useState<string | null>(null);
 
@@ -30,6 +34,8 @@ const Login = () => {
 
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('userId', user.id);
+
+            onLogin();
 
             setError(null);
             alert('login succeeded');
