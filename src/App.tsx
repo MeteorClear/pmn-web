@@ -7,10 +7,15 @@ import NoteList from './components/note/NoteList';
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'));
 
+    // 로그인 성공시 true
+    const handleLogin = () => {
+        setIsAuthenticated(true);
+    }
+
     return (
         <div>
             {!isAuthenticated ? 
-                <Login /> : 
+                <Login onLogin={handleLogin} /> : 
                 <div>
                     <UserDetail />
                     <NoteList />
