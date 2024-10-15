@@ -29,10 +29,12 @@ const Login = ({ onLogin }: LoginProps) => {
         try {
             // 로그인 시도
             const response = await apiClient.post('/auth/login', credentials);
-            // 로그인 성공 후 user 찾기
-            const user = await getUserByUsername(credentials.username);
 
             localStorage.setItem('token', response.data.token);
+
+            // 로그인 성공 후 user 찾기
+            const user = await getUserByUsername(credentials.username);
+            
             localStorage.setItem('userId', user.id);
 
             onLogin();
