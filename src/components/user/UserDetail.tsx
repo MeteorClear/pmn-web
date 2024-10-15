@@ -8,8 +8,9 @@ interface User {
     createdAt: string;
 };
 
-const UserDetail = (userId: number) => {
+const UserDetail = () => {
     const [user, setUser] = useState<User | null>(null);
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         const fetchUser = async () => {
