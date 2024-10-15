@@ -42,6 +42,7 @@ const Login = ({ onLogin }: LoginProps) => {
             setError(null);
             alert('login succeeded');
         } catch (error_) {
+            console.error("DEBUG::Login.tsx::", error_);
             setError('login failed');
         }
     };
