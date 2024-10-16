@@ -1,4 +1,5 @@
 import React, { HtmlHTMLAttributes, useState } from "react";
+import apiClient from "../../api/apiClient";
 
 interface UserRegisterRequest {
     email: string;
@@ -18,10 +19,23 @@ const Register = () => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            await apiClient.post('/users', user);
+            setError(null);
+            alert('register succeeded');
+        } catch (error_) {
+            console.error("DEBUG::Register.tsx::", error_);
+            setError('register failed');
+        }
+    };
+
     return (
         <div>
             <p>Register</p>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input 
                     type="email"
                     name="email"
@@ -48,6 +62,9 @@ const Register = () => {
                 />
                 <button type="submit">Register</button>
             </form>
+            {error && <p>{error}</p>}
         </div>
     );
 };
+
+export default Register;
