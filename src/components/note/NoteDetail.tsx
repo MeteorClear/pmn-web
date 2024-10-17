@@ -6,14 +6,21 @@ interface Note {
     title: string;
     content: string;
     createdAt: string;
-}
+};
+
+interface UpdateNoteRequest {
+    title: string;
+    content: string;
+};
 
 interface NoteDetailProps {
     noteId: number;
-}
+};
 
 const NoteDetail = ({ noteId }: NoteDetailProps) => {
     const [note, setNote] = useState<Note | null>(null);
+    const [loadError, setloadError] = useState<string | null>(null);
+    const [updateError, setupdateError] = useState<string | null>(null);
 
     // 노트 정보 Fetch
     useEffect(() => {
@@ -21,8 +28,10 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
             try {
                 const respnse = await apiClient.get(`/notes/${noteId}`);
                 setNote(respnse.data);
+                setloadError(null);
             } catch (error) {
                 console.error('[ERROR] NoteDetail.tsx ::', error);
+                setloadError('note loading failed');
             }
         };
         fetchNote();
@@ -30,9 +39,9 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
 
     if (!note) {
         return (
-            <>
-                loading
-            </>
+            <div>
+                {loadError && <p>{loadError}</p>}
+            </div>
         )
     }
 
