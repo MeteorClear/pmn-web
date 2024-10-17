@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import apiClient from "../../api/apiClient";
 
 interface CreateNoteRequest {
     title: string;
@@ -13,10 +14,22 @@ const CreateNote = () => {
         setNote({ ...note, [e.target.name]: e.target.value });
     };
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            await apiClient.post('/notes', note);
+            setError(null);
+        } catch (error_) {
+            console.error("[ERROR] CreateNote.tsx ::", error);
+            setError('note creation failed');
+        }
+    }
+
     return (
         <div>
             <p>Create Note</p>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input 
                     type="text"
                     name="title"
