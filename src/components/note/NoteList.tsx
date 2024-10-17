@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
 import NoteDetail from "./NoteDetail";
+import CreateNote from "./CreateNote";
 
 interface Note {
     id: number;
@@ -38,6 +39,9 @@ const NoteList = () => {
                         {note.title}
                     </div>
                 ))}
+            </div>
+            <div>
+                <CreateNote />
             </div>
             <div>
                 {selectedNote && <NoteDetail noteId={selectedNote} />}
