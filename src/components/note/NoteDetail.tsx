@@ -37,6 +37,16 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
         fetchNote();
     }, [noteId]);
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        if (note) {
+            setNote({ ...note, [e.target.name]: e.target.value });
+        }
+    };
+
+    const handleUpdate = async () => {
+        
+    }
+
     if (!note) {
         return (
             <div>
@@ -48,14 +58,27 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
     return (
         <div>
             <div>
-                {note.title}
+                <input 
+                    type="text"
+                    name="title"
+                    value={note.title}
+                    onChange={handleChange}
+                    placeholder="Note title"
+                    required
+                />
             </div>
             <div>
                 {new Date(note.createdAt).toLocaleDateString()}
             </div>
             <div>
-                {note.content}
+                <textarea 
+                    name="content"
+                    value={note.content}
+                    onChange={handleChange}
+                    placeholder="Note Content"
+                />
             </div>
+            <button>Save</button>
         </div>
     );
 };
