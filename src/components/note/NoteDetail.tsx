@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
+import { title } from "process";
 
 interface Note {
     id: number;
@@ -19,8 +20,8 @@ interface NoteDetailProps {
 
 const NoteDetail = ({ noteId }: NoteDetailProps) => {
     const [note, setNote] = useState<Note | null>(null);
-    const [loadError, setloadError] = useState<string | null>(null);
-    const [updateError, setupdateError] = useState<string | null>(null);
+    const [loadError, setLoadError] = useState<string | null>(null);
+    const [updateError, setUpdateError] = useState<string | null>(null);
 
     // 노트 정보 Fetch
     useEffect(() => {
@@ -28,10 +29,10 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
             try {
                 const respnse = await apiClient.get(`/notes/${noteId}`);
                 setNote(respnse.data);
-                setloadError(null);
+                setLoadError(null);
             } catch (error) {
                 console.error('[ERROR] NoteDetail.tsx ::', error);
-                setloadError('note loading failed');
+                setLoadError('note loading failed');
             }
         };
         fetchNote();
@@ -44,7 +45,18 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
     };
 
     const handleUpdate = async () => {
-        
+        if (note) {
+            try {
+                await apiClient.put(`/notes/${noteId}`, {
+                    title: note.title,
+                    content: note.content
+                });
+                setLoadError(null);
+            } catch (error) {
+                console.error('[ERROR] NoteDetail.tsx ::', error);
+                setUpdateError('note save failed');
+            }
+        }
     }
 
     if (!note) {
@@ -78,7 +90,7 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
                     placeholder="Note Content"
                 />
             </div>
-            <button>Save</button>
+            <button onClick={handleUpdate}>Save</button>
         </div>
     );
 };
