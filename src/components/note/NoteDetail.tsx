@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
 import { title } from "process";
+import DeleteNote from "./DeleteNote";
 
 interface Note {
     id: number;
@@ -91,6 +92,7 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
                 />
             </div>
             <button onClick={handleUpdate}>Save</button>
+            <DeleteNote noteId={note.id} />
         </div>
     );
 };
