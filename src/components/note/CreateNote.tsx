@@ -47,7 +47,7 @@ const CreateNote = () => {
                 />
                 <button type="submit">Create</button>
             </form>
-
+            {error && <p>{error}</p>}
         </div>
     );
 };
