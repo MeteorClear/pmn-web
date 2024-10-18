@@ -24,6 +24,7 @@ const DeleteNote = ({ noteId }: DeleteNoteProps ) => {
     return (
         <div>
             <button onClick={handleDelete}>Delete</button>
+            {error && <p>{error}</p>}
         </div>
     );
 };
