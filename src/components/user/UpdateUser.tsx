@@ -6,7 +6,6 @@ interface User {
     email: string;
     password: string
     username: string;
-    createdAt: string;
 };
 
 interface UpdateUserProps {
@@ -32,6 +31,20 @@ const UpdateUser = ({ userId }: UpdateUserProps) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (user) {
             setUser({ ...user, [e.target.name]: e.target.value });
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (user) {
+            try {
+                await apiClient.put(`/api/users/${user.id}`, user);
+                setError(null);
+            } catch (error_) {
+                console.error("[ERROR] UpdateUser.tsx ::", error);
+                setError("user info update failed");
+            }
         }
     };
 
@@ -65,6 +78,7 @@ const UpdateUser = ({ userId }: UpdateUserProps) => {
                 />
                 <button type="submit">Save</button>
             </form>
+            {error && <p>{error}</p>}
         </div>
     );
 };
