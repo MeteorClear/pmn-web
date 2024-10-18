@@ -4,6 +4,7 @@ import apiClient from "../../api/apiClient";
 interface User {
     id: number;
     email: string;
+    password: string
     username: string;
     createdAt: string;
 };
@@ -28,9 +29,42 @@ const UpdateUser = ({ userId }: UpdateUserProps) => {
         fetchUser();
     }, [userId]);
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (user) {
+            setUser({ ...user, [e.target.name]: e.target.value });
+        }
+    };
+
+    if (!user) {
+        return (
+            <div>
+                Loading user data...
+            </div>
+        );
+    }
+
     return (
         <div>
-
+            Change User Info
+            <form>
+                <input 
+                    type="text"
+                    name="username"
+                    value={user.username}
+                    onChange={handleChange}
+                    placeholder="Username"
+                    required
+                />
+                <input 
+                    type="password"
+                    name="password"
+                    value={user.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    required
+                />
+                <button type="submit">Save</button>
+            </form>
         </div>
     );
 };
