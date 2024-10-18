@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import apiClient from "../../api/apiClient";
 
-interface DeleteNoteProps {
-    noteId: number;
+interface DeleteUserProps {
+    userId: number;
 };
 
-const DeleteUser = ({ noteId }: DeleteNoteProps ) => {
+const DeleteUser = ({ userId }: DeleteUserProps ) => {
     const [error, setError] = useState<string | null>(null);
 
     const handleDelete = async () => {
@@ -13,11 +13,11 @@ const DeleteUser = ({ noteId }: DeleteNoteProps ) => {
         if (!confirmDelete) return;
 
         try {
-            await apiClient.delete(`/notes/${noteId}`);
+            await apiClient.delete(`/api/users/${userId}`);
             setError(null);
         } catch (error_) {
             console.error("[ERROR] DeleteNote.tsx ::", error);
-            setError("note delete failed");
+            setError("user delete failed");
         }
     }
 
