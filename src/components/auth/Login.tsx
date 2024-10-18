@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import apiClient from '../../api/apiClient';
-import getUserByUsername from '../user/UserFind';
 
 // 로그인 컴포넌트
 
@@ -16,6 +15,17 @@ interface LoginProps {
 const Login = ({ onLogin }: LoginProps) => {
     const [credentials, setCredentials] = useState<JwtRequest>({ username: '', password: '' });
     const [error, setError] = useState<string | null>(null);
+
+    const getUserByUsername = async (email: string) => {
+        try {
+            const response = await apiClient.get(`/users/email`, {
+                params: { email }
+            });
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    };
 
     // form 변화에 따른 값 변화
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
