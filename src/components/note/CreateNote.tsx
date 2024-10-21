@@ -1,15 +1,41 @@
 import React, { useState } from "react";
 import apiClient from "../../api/apiClient";
 
+interface User {
+    id: number;
+    email: string;
+    password: string;
+    username: string;
+    createdAt: string;
+}
+
 interface CreateNoteRequest {
+    id: number;
+    user: User;
     title: string;
     content: string;
+    createdAt: string;
+    updatedAt: string;
 };
 
 const CreateNote = () => {
-    const [note, setNote] = useState<CreateNoteRequest>({ title: "", content: "" });
+    const userId = Number(localStorage.getItem('userId'));
+    const [note, setNote] = useState<CreateNoteRequest>({
+        id: 0, // 초기 ID 설정
+        user: {
+            id: userId,
+            email: '',
+            password: '',
+            username: '',
+            createdAt: ''
+        },
+        title: "",
+        content: "",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+    });
     const [error, setError] = useState<string | null>(null);
-    const userId = localStorage.getItem('userId');
+    
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setNote({ ...note, [e.target.name]: e.target.value });
