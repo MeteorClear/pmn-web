@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
-import { title } from "process";
 import DeleteNote from "./DeleteNote";
+
+interface User {
+    id: number;
+    email: string;
+    password: string;
+    username: string;
+    createdAt: string;
+}
 
 interface Note {
     id: number;
+    user: User;
     title: string;
     content: string;
     createdAt: string;
-};
-
-interface UpdateNoteRequest {
-    title: string;
-    content: string;
+    updatedAt: string;
 };
 
 interface NoteDetailProps {
@@ -48,11 +52,13 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
     const handleUpdate = async () => {
         if (note) {
             try {
-                await apiClient.put(`/notes/${noteId}`, {
-                    title: note.title,
-                    content: note.content
-                });
-                setLoadError(null);
+                const updatedNote = {
+                    ...note,
+                    updateAt: new Date().toISOString,
+                };
+
+                await apiClient.put(`/notes/${noteId}`, updatedNote);
+                setUpdateError(null);
             } catch (error) {
                 console.error('[ERROR] NoteDetail.tsx ::', error);
                 setUpdateError('note save failed');
