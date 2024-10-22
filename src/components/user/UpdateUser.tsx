@@ -59,7 +59,7 @@ const UpdateUser = ({ userId }: UpdateUserProps) => {
     return (
         <div>
             Change User Info
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input 
                     type="text"
                     name="username"
