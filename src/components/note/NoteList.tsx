@@ -31,7 +31,7 @@ const NoteList = () => {
     // 목록 중 클릭한 노트 번호 추출
 
     return (
-        <div>
+        <div style={{border: '2px solid black'}}>
             <div>
                 <p>Note List...</p>
                 {notes.map((note) => (

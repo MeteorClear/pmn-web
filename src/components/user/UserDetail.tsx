@@ -36,7 +36,7 @@ const UserDetail = () => {
     }
 
     return (
-        <div>
+        <div style={{border: '2px solid black'}}>
             <p>{user.id}</p>
             <p>{user.email}</p>
             <p>{user.username}</p>
