@@ -98,6 +98,7 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
                 />
             </div>
             <button onClick={handleUpdate}>Save</button>
+            {loadError && <p>{loadError}</p>}
             <DeleteNote noteId={note.id} />
         </div>
     );
