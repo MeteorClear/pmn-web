@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './components/auth/Login';
 import UserDetail from './components/user/UserDetail';
@@ -20,20 +21,36 @@ const App = () => {
     }
 
     return (
-        <div>
-            {!isAuthenticated ? 
-                <div>
-                    <Login onLogin={handleLogin} />
-                    <Register />
-                </div>
-                : 
-                <div>
-                    <Logout onLogout={handleLogout} />
-                    <UserDetail />
-                    <NoteList />
-                </div>
-            }
-        </div>
+        <Router>
+            <Routes>
+                {/* 로그인 페이지 경로 */}
+                <Route
+                    path="/login"
+                    element={
+                        <div>
+                            <Login onLogin={handleLogin} />
+                            <Register />
+                        </div>
+                    }
+                />
+
+                {/* 메인 페이지 경로 (인증된 상태) */}
+                <Route
+                    path="/"
+                    element={
+                        isAuthenticated ? (
+                            <div>
+                                <Logout onLogout={handleLogout} />
+                                <UserDetail />
+                                <NoteList />
+                            </div>
+                        ) : (
+                            <Login onLogin={handleLogin} />
+                        )
+                    }
+                />
+            </Routes>
+        </Router>
     );
 };
 
