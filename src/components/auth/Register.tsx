@@ -1,4 +1,4 @@
-import React, { HtmlHTMLAttributes, useState } from "react";
+import React, { useState } from "react";
 import apiClient from "../../api/apiClient";
 
 interface UserRegisterRequest {
