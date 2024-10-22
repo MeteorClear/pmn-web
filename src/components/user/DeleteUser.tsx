@@ -13,7 +13,7 @@ const DeleteUser = ({ userId }: DeleteUserProps ) => {
         if (!confirmDelete) return;
 
         try {
-            await apiClient.delete(`/api/users/${userId}`);
+            await apiClient.delete(`/users/${userId}`);
             setError(null);
         } catch (error_) {
             console.error("[ERROR] DeleteNote.tsx ::", error);
