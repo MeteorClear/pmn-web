@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import Login from './components/auth/Login';
 import UserDetail from './components/user/UserDetail';
@@ -45,10 +45,13 @@ const App = () => {
                                 <NoteList />
                             </div>
                         ) : (
-                            <Login onLogin={handleLogin} />
+                            <Navigate to="/login" replace />
                         )
                     }
                 />
+
+                {/* 로그인하지 않았을 때 모든 경로에서 로그인 페이지로 리다이렉트 */}
+                <Route path="*" element={<Navigate to="/login" replace />} />
             </Routes>
         </Router>
     );
