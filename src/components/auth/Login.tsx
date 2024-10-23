@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
+import styles from './Login.module.css';
 
 // 로그인 컴포넌트
 
@@ -64,26 +65,28 @@ const Login = ({ onLogin }: LoginProps) => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="username"
-                    value={credentials.username}
-                    onChange={handleChange}
-                    placeholder="Email"
-                />
-                <input
-                    type="password"
-                    name="password"
-                    value={credentials.password}
-                    onChange={handleChange}
-                    placeholder="Password"
-                />
-                <button type="submit">Login</button>
-            </form>
-            {error && <p>{error}</p>}
-            <button onClick={handleRegister}>Register</button>
+        <div className={styles.container}>
+            <div className={styles.loginBox}>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="username"
+                        value={credentials.username}
+                        onChange={handleChange}
+                        placeholder="Email"
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        value={credentials.password}
+                        onChange={handleChange}
+                        placeholder="Password"
+                    />
+                    <button type="submit">Login</button>
+                </form>
+                {error && <p>{error}</p>}
+                <button onClick={handleRegister}>Register</button>
+            </div>
         </div>
     );
 };
