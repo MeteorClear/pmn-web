@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
 
 // 로그인 컴포넌트
@@ -15,6 +16,7 @@ interface LoginProps {
 const Login = ({ onLogin }: LoginProps) => {
     const [credentials, setCredentials] = useState<JwtRequest>({ username: '', password: '' });
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const getUserByUsername = async (email: string) => {
         try {
@@ -57,6 +59,10 @@ const Login = ({ onLogin }: LoginProps) => {
         }
     };
 
+    const handleRegister = () => {
+        navigate('/register');
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -77,6 +83,7 @@ const Login = ({ onLogin }: LoginProps) => {
                 <button type="submit">Login</button>
             </form>
             {error && <p>{error}</p>}
+            <button onClick={handleRegister}>Register</button>
         </div>
     );
 };
