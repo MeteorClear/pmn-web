@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 
 interface UserRegisterRequest {
@@ -14,6 +15,7 @@ const Register = () => {
         username: ''
     });
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -26,6 +28,7 @@ const Register = () => {
             await apiClient.post('/users', user);
             setError(null);
             alert('register succeeded');
+            navigate('/login');
         } catch (error_) {
             console.error("DEBUG::Register.tsx::", error_);
             setError('register failed');
