@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/apiClient";
+import styles from './Register.module.css';
 
 interface UserRegisterRequest {
     email: string;
@@ -36,10 +37,11 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <p>Register</p>
-            <form onSubmit={handleSubmit}>
+        <div className={styles.container}>
+            <div className={styles.registerBox}>
+                <p>Register</p>
                 <input 
+                    className={styles.inputBox}
                     type="email"
                     name="email"
                     value={user.email}
@@ -48,6 +50,7 @@ const Register = () => {
                     required
                 />
                 <input 
+                    className={styles.inputBox}
                     type="password"
                     name="password"
                     value={user.password}
@@ -56,6 +59,7 @@ const Register = () => {
                     required
                 />
                 <input 
+                    className={styles.inputBox}
                     type="text"
                     name="username"
                     value={user.username}
@@ -63,9 +67,9 @@ const Register = () => {
                     placeholder="Username"
                     required
                 />
-                <button type="submit">Register</button>
-            </form>
-            {error && <p>{error}</p>}
+                {error && <p>{error}</p>}
+                <button className={styles.button} onClick={handleSubmit}>Register</button>
+            </div>
         </div>
     );
 };
