@@ -26,12 +26,13 @@ const App = () => {
                 {/* 로그인 페이지 경로 */}
                 <Route
                     path="/login"
-                    element={
-                        <div>
-                            <Login onLogin={handleLogin} />
-                            <Register />
-                        </div>
-                    }
+                    element={ <Login onLogin={handleLogin} /> }
+                />
+
+                {/* 회원가입 페이지 경로 */}
+                <Route
+                    path='/register'
+                    element={ <Register /> }
                 />
 
                 {/* 메인 페이지 경로 (인증된 상태) */}
