@@ -67,25 +67,26 @@ const Login = ({ onLogin }: LoginProps) => {
     return (
         <div className={styles.container}>
             <div className={styles.loginBox}>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        name="username"
-                        value={credentials.username}
-                        onChange={handleChange}
-                        placeholder="Email"
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        value={credentials.password}
-                        onChange={handleChange}
-                        placeholder="Password"
-                    />
-                    <button type="submit">Login</button>
-                </form>
+                <p>Project MN Login</p>
+                <input
+                    className={styles.inputBox}
+                    type="text"
+                    name="username"
+                    value={credentials.username}
+                    onChange={handleChange}
+                    placeholder="Email"
+                />
+                <input
+                    className={styles.inputBox}
+                    type="password"
+                    name="password"
+                    value={credentials.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                />
                 {error && <p>{error}</p>}
-                <button onClick={handleRegister}>Register</button>
+                <button className={styles.button} onClick={handleSubmit}>Login</button>
+                <button className={styles.button} onClick={handleRegister}>Register</button>
             </div>
         </div>
     );
