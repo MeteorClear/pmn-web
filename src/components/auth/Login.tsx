@@ -54,6 +54,7 @@ const Login = ({ onLogin }: LoginProps) => {
             const user = await getUserByUsername(credentials.username);
             
             localStorage.setItem('userId', user.id);
+            localStorage.setItem('userEmail', user.email);
 
             onLogin();
 

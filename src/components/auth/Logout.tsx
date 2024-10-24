@@ -10,6 +10,7 @@ const Logout = ({ onLogout }: LogoutProps) => {
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
+        localStorage.removeItem('userEmail');
         onLogout();
         alert('logout succeeded');
     };
