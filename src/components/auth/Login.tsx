@@ -92,22 +92,22 @@ const Login = ({ onLogin, setEncodedUserPath }: LoginProps) => {
     return (
         <div className={styles.container}>
             <div className={styles.loginBox}>
-                <p>Project MN Login</p>
+                <p className={styles.title}>Project MN Login</p>
+                <p className={styles.inputPlaceholder}>Email</p>
                 <input
                     className={styles.inputBox}
                     type="text"
                     name="username"
                     value={credentials.username}
                     onChange={handleChange}
-                    placeholder="Email"
                 />
+                <p className={styles.inputPlaceholder}>Password</p>
                 <input
                     className={styles.inputBox}
                     type="password"
                     name="password"
                     value={credentials.password}
                     onChange={handleChange}
-                    placeholder="Password"
                 />
                 {error && <p className={styles.error}>{error}</p>}
                 <button className={styles.button} onClick={handleSubmit}>Login</button>
