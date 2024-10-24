@@ -39,6 +39,11 @@ const Login = ({ onLogin }: LoginProps) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!credentials.username || !credentials.password) {
+            setError('There are empty items');
+            return;
+        }
+
         try {
             // 로그인 시도
             const response = await apiClient.post('/auth/login', credentials);
