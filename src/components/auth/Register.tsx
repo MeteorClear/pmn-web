@@ -26,7 +26,8 @@ const Register = () => {
         e.preventDefault();
 
         if (!user.email || !user.password || !user.username) {
-            setError('There are empty items')
+            setError('There are empty items');
+            return;
         }
 
         try {
