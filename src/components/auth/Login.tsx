@@ -12,9 +12,10 @@ interface JwtRequest {
 
 interface LoginProps {
     onLogin: () => void;
+    setEncodedUserPath: (path: string) => void;
 }
 
-const Login = ({ onLogin }: LoginProps) => {
+const Login = ({ onLogin, setEncodedUserPath }: LoginProps) => {
     const [credentials, setCredentials] = useState<JwtRequest>({ username: '', password: '' });
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
@@ -60,6 +61,16 @@ const Login = ({ onLogin }: LoginProps) => {
 
             setError(null);
             alert('login succeeded');
+
+            const userEmail = localStorage.getItem('userEmail');
+            if (userEmail) {
+                const encodedUserPath = encodePath(userEmail);
+                setEncodedUserPath(encodedUserPath);
+                navigate(`/${encodedUserPath}`);
+            } else {
+                setError('main page load failed');
+            }
+
         } catch (error_) {
             console.error("DEBUG::Login.tsx::", error_);
             setError('login failed');
@@ -68,6 +79,14 @@ const Login = ({ onLogin }: LoginProps) => {
 
     const handleRegister = () => {
         navigate('/register');
+    }
+
+    const encodePath = (path: string) => {
+        try {
+            return btoa(path); // Base64
+        } catch (error) {
+            return path;
+        }
     }
 
     return (
