@@ -25,6 +25,10 @@ const Register = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!user.email || !user.password || !user.username) {
+            setError('There are empty items')
+        }
+
         try {
             await apiClient.post('/users', user);
             setError(null);
