@@ -84,7 +84,7 @@ const Login = ({ onLogin }: LoginProps) => {
                     onChange={handleChange}
                     placeholder="Password"
                 />
-                {error && <p>{error}</p>}
+                {error && <p className={styles.error}>{error}</p>}
                 <button className={styles.button} onClick={handleSubmit}>Login</button>
                 <button className={styles.button} onClick={handleRegister}>Register</button>
             </div>

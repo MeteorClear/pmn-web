@@ -72,7 +72,7 @@ const Register = () => {
                     placeholder="Username"
                     required
                 />
-                {error && <p>{error}</p>}
+                {error && <p className={styles.error}>{error}</p>}
                 <button className={styles.button} onClick={handleSubmit}>Register</button>
             </div>
         </div>
