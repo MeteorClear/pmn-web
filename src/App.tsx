@@ -10,7 +10,6 @@ import Register from './components/auth/Register';
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'));
     const [encodedUserPath, setEncodedUserPath] = useState<string | null>(null);
-    const navigate = useNavigate();
 
     // 로그인 성공시 true
     const handleLogin = () => {
@@ -18,7 +17,7 @@ const App = () => {
         const userEmail = localStorage.getItem('userEmail');
         if (userEmail) {
             setEncodedUserPath(encodePath(userEmail));
-            navigate(`/${encodedUserPath}`);
+            //navigate(`/${encodedUserPath}`);
         } else {
             alert('path error');
         }
@@ -27,7 +26,6 @@ const App = () => {
     // 로그아웃시 false
     const handleLogout = () => {
         setIsAuthenticated(false);
-        navigate('/login');
     }
 
     const encodePath = (path: string) => {
@@ -44,7 +42,7 @@ const App = () => {
                 {/* 로그인 페이지 경로 */}
                 <Route
                     path="/login"
-                    element={ <Login onLogin={handleLogin} /> }
+                    element={<Login onLogin={handleLogin} />}
                 />
 
                 {/* 회원가입 페이지 경로 */}
