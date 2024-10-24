@@ -44,32 +44,32 @@ const Register = () => {
     return (
         <div className={styles.container}>
             <div className={styles.registerBox}>
-                <p>Register</p>
+                <p className={styles.title}>Project MN Register</p>
+                <p className={styles.inputPlaceholder}>Email</p>
                 <input 
                     className={styles.inputBox}
                     type="email"
                     name="email"
                     value={user.email}
                     onChange={handleChange}
-                    placeholder="Email"
                     required
                 />
+                <p className={styles.inputPlaceholder}>Password</p>
                 <input 
                     className={styles.inputBox}
                     type="password"
                     name="password"
                     value={user.password}
                     onChange={handleChange}
-                    placeholder="Password"
                     required
                 />
+                <p className={styles.inputPlaceholder}>Username</p>
                 <input 
                     className={styles.inputBox}
                     type="text"
                     name="username"
                     value={user.username}
                     onChange={handleChange}
-                    placeholder="Username"
                     required
                 />
                 {error && <p className={styles.error}>{error}</p>}
