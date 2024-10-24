@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
 import Login from './components/auth/Login';
 import UserDetail from './components/user/UserDetail';
@@ -9,15 +9,33 @@ import Register from './components/auth/Register';
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'));
+    const [encodedUserPath, setEncodedUserPath] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     // 로그인 성공시 true
     const handleLogin = () => {
         setIsAuthenticated(true);
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) {
+            setEncodedUserPath(encodePath(userEmail));
+            navigate(`/${encodedUserPath}`);
+        } else {
+            alert('path error');
+        }
     }
 
     // 로그아웃시 false
     const handleLogout = () => {
         setIsAuthenticated(false);
+        navigate('/login');
+    }
+
+    const encodePath = (path: string) => {
+        try {
+            return btoa(path); // Base64
+        } catch (error) {
+            return path;
+        }
     }
 
     return (
@@ -36,8 +54,8 @@ const App = () => {
                 />
 
                 {/* 메인 페이지 경로 (인증된 상태) */}
-                <Route
-                    path="/"
+                <Route 
+                    path={`/${encodedUserPath}`}
                     element={
                         isAuthenticated ? (
                             <div>
@@ -45,6 +63,17 @@ const App = () => {
                                 <UserDetail />
                                 <NoteList />
                             </div>
+                        ) : (
+                            <Navigate to="/login" replace />
+                        )
+                    }
+                />
+
+                <Route
+                    path="/"
+                    element={
+                        isAuthenticated ? (
+                            <Navigate to={`/${encodedUserPath}`} replace />
                         ) : (
                             <Navigate to="/login" replace />
                         )
