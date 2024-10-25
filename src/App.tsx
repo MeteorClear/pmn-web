@@ -7,6 +7,7 @@ import NoteList from './components/note/NoteList';
 import Logout from './components/auth/Logout';
 import Register from './components/auth/Register';
 import UpdateUser from './components/user/UpdateUser';
+import DeleteUser from './components/user/DeleteUser';
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'));
@@ -60,6 +61,18 @@ const App = () => {
                     element={
                         isAuthenticated ? (
                             <UpdateUser />
+                        ) : (
+                            <Navigate to="/login" replace />
+                        )
+                    }
+                />
+
+                {/* 사용자 삭제 페이지 경로 */}
+                <Route
+                    path={`/${encodedUserPath}/change/delete`}
+                    element={
+                        isAuthenticated ? (
+                            <DeleteUser />
                         ) : (
                             <Navigate to="/login" replace />
                         )
