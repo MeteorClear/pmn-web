@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
 import { useLocation, useNavigate } from "react-router-dom";
+import styles from './DeleteUser.module.css';
 
 const DeleteUser = () => {
     const [userId, setUserId] = useState<number | null>(null);
@@ -44,10 +45,13 @@ const DeleteUser = () => {
     }
 
     return (
-        <div>
-            <button onClick={handleDelete}>Delete</button>
-            <button onClick={handleBackToMain}>Back</button>
-            {error && <p>{error}</p>}
+        <div className={styles.container}>
+            <div className={styles.deleteBox}>
+                <p className={styles.title}>Delete User</p>
+                <button className={styles.deleteButton} onClick={handleDelete}>Delete</button>
+                {error && <p>{error}</p>}
+                <button className={styles.button} onClick={handleBackToMain}>Back</button>
+            </div>
         </div>
     );
 };
