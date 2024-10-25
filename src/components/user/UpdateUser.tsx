@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
 import { useLocation, useNavigate } from "react-router-dom";
+import styles from './UpdateUser.module.css';
 
 interface User {
     id: number;
@@ -27,12 +28,13 @@ const UpdateUser = () => {
             }
 
             setUserId(Number(storedUserId));
-
-            try {
-                const response = await apiClient.get(`/users/${userId}`);
-                setUser(response.data);
-            } catch (error) {
-                console.error('[ERROR] UserDetail.tsx ::', error);
+            if (userId) {
+                try {
+                    const response = await apiClient.get(`/users/${userId}`);
+                    setUser(response.data);
+                } catch (error) {
+                    console.error('[ERROR] UserDetail.tsx ::', error);
+                }
             }
         };
         fetchUser();
@@ -48,6 +50,11 @@ const UpdateUser = () => {
         e.preventDefault();
 
         if (user) {
+            if (!user.username || !user.password) {
+                setError('There are empty items');
+                return;
+            }
+
             try {
                 await apiClient.put(`/api/users/${user.id}`, user);
                 setError(null);
@@ -66,6 +73,10 @@ const UpdateUser = () => {
         navigate(parentPath);
     }
 
+    const handleDeleteUser = () => {
+        navigate(`${location.pathname}/delete`);
+    }
+
     if (!user) {
         return (
             <div>
@@ -75,28 +86,30 @@ const UpdateUser = () => {
     }
 
     return (
-        <div>
-            <div>
-                Change User Info
+        <div className={styles.container}>
+            <div className={styles.updateBox}>
+                <p className={styles.title}>Change User Info</p>
+                <p className={styles.inputPlaceholder}>Username</p>
                 <input 
+                    className={styles.inputBox}
                     type="text"
                     name="username"
                     value={user.username}
                     onChange={handleChange}
-                    placeholder="Username"
                     required
                 />
+                <p className={styles.inputPlaceholder}>Password</p>
                 <input 
+                    className={styles.inputBox}
                     type="password"
                     name="password"
-                    value={user.password}
+                    value=""
                     onChange={handleChange}
-                    placeholder="Password"
                     required
                 />
-                <button onClick={handleSubmit}>Save</button>
-                <button onClick={handleBackToMain}>Back</button>
-                <button onClick={handleSubmit}>Save</button>
+                <button className={styles.button} onClick={handleSubmit}>Save</button>
+                <button className={styles.button} onClick={handleBackToMain}>Back</button>
+                <button className={styles.deleteButton} onClick={handleDeleteUser}>Delete</button>
                 {error && <p>{error}</p>}
             </div>
         </div>
