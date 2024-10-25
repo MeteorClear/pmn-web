@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface User {
     id: number;
@@ -13,6 +13,7 @@ const UpdateUser = () => {
     const [user, setUser] = useState<User | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [userId, setUserId] = useState<number | null>(null);
+    const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,7 +36,7 @@ const UpdateUser = () => {
             }
         };
         fetchUser();
-    }, [navigate]);
+    }, [userId, navigate]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (user) {
@@ -50,13 +51,20 @@ const UpdateUser = () => {
             try {
                 await apiClient.put(`/api/users/${user.id}`, user);
                 setError(null);
-                navigate(-1);
+
+                handleBackToMain();
             } catch (error_) {
                 console.error("[ERROR] UpdateUser.tsx ::", error);
                 setError("user info update failed");
             }
         }
     };
+
+    const handleBackToMain = () => {
+        const currentPath = location.pathname;
+        const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+        navigate(parentPath);
+    }
 
     if (!user) {
         return (
@@ -68,8 +76,8 @@ const UpdateUser = () => {
 
     return (
         <div>
-            Change User Info
-            <form onSubmit={handleSubmit}>
+            <div>
+                Change User Info
                 <input 
                     type="text"
                     name="username"
@@ -86,9 +94,11 @@ const UpdateUser = () => {
                     placeholder="Password"
                     required
                 />
-                <button type="submit">Save</button>
-            </form>
-            {error && <p>{error}</p>}
+                <button onClick={handleSubmit}>Save</button>
+                <button onClick={handleBackToMain}>Back</button>
+                <button onClick={handleSubmit}>Save</button>
+                {error && <p>{error}</p>}
+            </div>
         </div>
     );
 };
