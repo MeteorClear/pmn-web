@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
+import { useNavigate } from "react-router-dom";
 
 interface User {
     id: number;
@@ -8,16 +9,24 @@ interface User {
     username: string;
 };
 
-interface UpdateUserProps {
-    userId: number;
-};
-
-const UpdateUser = ({ userId }: UpdateUserProps) => {
+const UpdateUser = () => {
     const [user, setUser] = useState<User | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [userId, setUserId] = useState<number | null>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
+            const storedUserId = localStorage.getItem('userId')
+            if (!storedUserId) {
+                alert('User load failed, please relogin');
+                console.error('[ERROR] UpdateUser.tsx:: no userId found');
+                navigate('/login');
+                return;
+            }
+
+            setUserId(Number(storedUserId));
+
             try {
                 const response = await apiClient.get(`/users/${userId}`);
                 setUser(response.data);
@@ -26,7 +35,7 @@ const UpdateUser = ({ userId }: UpdateUserProps) => {
             }
         };
         fetchUser();
-    }, [userId]);
+    }, [navigate]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (user) {
@@ -41,6 +50,7 @@ const UpdateUser = ({ userId }: UpdateUserProps) => {
             try {
                 await apiClient.put(`/api/users/${user.id}`, user);
                 setError(null);
+                navigate(-1);
             } catch (error_) {
                 console.error("[ERROR] UpdateUser.tsx ::", error);
                 setError("user info update failed");
