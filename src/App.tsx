@@ -6,6 +6,7 @@ import UserDetail from './components/user/UserDetail';
 import NoteList from './components/note/NoteList';
 import Logout from './components/auth/Logout';
 import Register from './components/auth/Register';
+import UpdateUser from './components/user/UpdateUser';
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'));
@@ -47,6 +48,18 @@ const App = () => {
                                 <UserDetail />
                                 <NoteList />
                             </div>
+                        ) : (
+                            <Navigate to="/login" replace />
+                        )
+                    }
+                />
+
+                {/* 사용자 정보 업데이트 페이지 경로 */}
+                <Route
+                    path={`/${encodedUserPath}/change`}
+                    element={
+                        isAuthenticated ? (
+                            <UpdateUser />
                         ) : (
                             <Navigate to="/login" replace />
                         )
