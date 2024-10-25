@@ -8,6 +8,7 @@ import Logout from './components/auth/Logout';
 import Register from './components/auth/Register';
 import UpdateUser from './components/user/UpdateUser';
 import DeleteUser from './components/user/DeleteUser';
+import styles from './App.module.css';
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'));
@@ -45,8 +46,10 @@ const App = () => {
                     element={
                         isAuthenticated ? (
                             <div>
-                                <Logout onLogout={handleLogout} />
-                                <UserDetail />
+                                <div className={styles.userContainer}>
+                                    <UserDetail />
+                                    <Logout onLogout={handleLogout} />
+                                </div>
                                 <NoteList />
                             </div>
                         ) : (

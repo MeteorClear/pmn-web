@@ -1,0 +1,27 @@
+/* Logout.module.css */
+
+.container {
+    height: 100%;
+    width: 100px;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    color: #abb0f2;
+    float: left;
+    
+}
+
+.button {
+    margin-left: auto;
+    height: 100%;
+    width: 100%;
+    color: #abb0f2;
+    background-color: #333333;
+    border-style: none;
+    
+}
+
+.button:hover {
+    background-color: #abb0f2;
+    color: red;
+}

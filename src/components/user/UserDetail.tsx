@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
 import { useLocation, useNavigate } from "react-router-dom";
+import styles from './UserDetail.module.css';
 
 interface User {
     id: number;
@@ -41,12 +42,12 @@ const UserDetail = () => {
     }
 
     return (
-        <div style={{border: '2px solid black'}}>
-            <p>{user.id}</p>
-            <p>{user.email}</p>
-            <p>{user.username}</p>
-            <p>{user.createdAt}</p>
-            <button onClick={handleUpdateUser}>Change User Info</button>
+        <div className={styles.container}>
+            <p className={styles.userInfo}>{user.id}</p>
+            <p className={styles.userInfo}>{user.email}</p>
+            <p className={styles.userInfo}>{user.username}</p>
+            <p className={styles.userInfo}>{user.createdAt}</p>
+            <button className={styles.button} onClick={handleUpdateUser}>Change User Info</button>
         </div>
     );
 };
