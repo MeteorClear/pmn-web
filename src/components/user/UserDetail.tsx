@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
-import UpdateUser from "./UpdateUser";
-import DeleteUser from "./DeleteUser";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface User {
     id: number;
@@ -14,6 +13,8 @@ const UserDetail = () => {
     const [user, setUser] = useState<User | null>(null);
     const userIdString = localStorage.getItem('userId');
     const userId = userIdString ? parseInt(userIdString, 10) : null;
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -26,6 +27,10 @@ const UserDetail = () => {
         };
         fetchUser();
     }, [userId]);
+
+    const handleUpdateUser = () => {
+        navigate(`${location.pathname}/change`);
+    }
 
     if (!user) {
         return (
@@ -41,10 +46,7 @@ const UserDetail = () => {
             <p>{user.email}</p>
             <p>{user.username}</p>
             <p>{user.createdAt}</p>
-            <div>
-                {userId !== null && <UpdateUser userId={userId} />}
-                {userId !== null && <DeleteUser userId={userId} />}
-            </div>
+            <button onClick={handleUpdateUser}>Change User Info</button>
         </div>
     );
 };
