@@ -49,7 +49,7 @@ const DeleteUser = () => {
             <div className={styles.deleteBox}>
                 <p className={styles.title}>Delete User</p>
                 <button className={styles.deleteButton} onClick={handleDelete}>Delete</button>
-                {error && <p>{error}</p>}
+                {error && <p className={styles.error}>{error}</p>}
                 <button className={styles.button} onClick={handleBackToMain}>Back</button>
             </div>
         </div>
