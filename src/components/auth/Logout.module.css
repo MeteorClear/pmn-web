@@ -24,4 +24,5 @@
 .button:hover {
     background-color: #abb0f2;
     color: red;
+    cursor: pointer;
 }
