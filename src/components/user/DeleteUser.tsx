@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const DeleteUser = () => {
     const [userId, setUserId] = useState<number | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,9 +36,17 @@ const DeleteUser = () => {
         }
     }
 
+    const handleBackToMain = () => {
+        const currentPath = location.pathname;
+        const cutPosition = currentPath.substring(0, currentPath.lastIndexOf('/'));
+        const parentPath = cutPosition.substring(0, cutPosition.lastIndexOf('/'));
+        navigate(parentPath);
+    }
+
     return (
         <div>
             <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleBackToMain}>Back</button>
             {error && <p>{error}</p>}
         </div>
     );
