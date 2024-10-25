@@ -110,7 +110,7 @@ const UpdateUser = () => {
                 <button className={styles.button} onClick={handleSubmit}>Save</button>
                 <button className={styles.button} onClick={handleBackToMain}>Back</button>
                 <button className={styles.deleteButton} onClick={handleDeleteUser}>Delete</button>
-                {error && <p>{error}</p>}
+                {error && <p className={styles.error}>{error}</p>}
             </div>
         </div>
     );
