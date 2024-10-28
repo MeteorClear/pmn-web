@@ -54,7 +54,7 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
             try {
                 const updatedNote = {
                     ...note,
-                    updatedAt: new Date().toISOString,
+                    updatedAt: new Date().toISOString(),
                 };
 
                 await apiClient.put(`/notes/${noteId}`, updatedNote);
