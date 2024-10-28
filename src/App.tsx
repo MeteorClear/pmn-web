@@ -45,12 +45,14 @@ const App = () => {
                     path={`/${encodedUserPath}`}
                     element={
                         isAuthenticated ? (
-                            <div>
+                            <div className={styles.container}>
                                 <div className={styles.userContainer}>
                                     <UserDetail />
                                     <Logout onLogout={handleLogout} />
                                 </div>
-                                <NoteList />
+                                <div className={styles.noteContainer}>
+                                    <NoteList />
+                                </div>
                             </div>
                         ) : (
                             <Navigate to="/login" replace />
