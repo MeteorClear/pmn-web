@@ -24,4 +24,11 @@
     box-sizing: border-box;
     padding-left: 10px;
     padding-bottom: 1px;
+    cursor: pointer;
+    color: #eeeeee;
+}
+
+.noteItem:hover {
+    background-color: #abb0f2;
+    color: black;
 }
