@@ -54,7 +54,7 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
             try {
                 const updatedNote = {
                     ...note,
-                    updateAt: new Date().toISOString,
+                    updatedAt: new Date().toISOString,
                 };
 
                 await apiClient.put(`/notes/${noteId}`, updatedNote);
@@ -87,7 +87,8 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
                 />
             </div>
             <div>
-                {new Date(note.createdAt).toLocaleDateString()}
+                {note.createdAt}
+                {note.updatedAt}
             </div>
             <div>
                 <textarea 
@@ -99,6 +100,7 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
             </div>
             <button onClick={handleUpdate}>Save</button>
             {loadError && <p>{loadError}</p>}
+            {updateError && <p>{updateError}</p>}
             <DeleteNote noteId={note.id} />
         </div>
     );
