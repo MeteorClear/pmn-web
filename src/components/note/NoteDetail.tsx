@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
 import DeleteNote from "./DeleteNote";
+import styles from './NoteDetail.module.css';
 
 interface User {
     id: number;
@@ -77,30 +78,28 @@ const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
     }
 
     return (
-        <div>
-            <div>
-                <input 
-                    type="text"
-                    name="title"
-                    value={note.title}
-                    onChange={handleChange}
-                    placeholder="Note title"
-                    required
-                />
-            </div>
-            <div>
+        <div className={styles.container}>
+            <input 
+                className={styles.titleBox}
+                type="text"
+                name="title"
+                value={note.title}
+                onChange={handleChange}
+                placeholder="Note title"
+                required
+            />
+            <div className={styles.dateBox}>
                 {note.createdAt}
                 {note.updatedAt}
             </div>
-            <div>
-                <textarea 
-                    name="content"
-                    value={note.content}
-                    onChange={handleChange}
-                    placeholder="Note Content"
-                />
-            </div>
-            <div>
+            <textarea 
+                className={styles.contentBox}
+                name="content"
+                value={note.content}
+                onChange={handleChange}
+                placeholder="Note Content"
+            />
+            <div className={styles.buttonBox}>
                 {loadError && <p>{loadError}</p>}
                 {updateError && <p>{updateError}</p>}
                 <button onClick={handleUpdate}>Save</button>
