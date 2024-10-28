@@ -41,6 +41,10 @@ const NoteList = () => {
         setCreatedNote(true);
     }
 
+    const handleNoteListUpdate = () => {
+        window.location.reload();
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.noteListBox}>
@@ -66,7 +70,7 @@ const NoteList = () => {
             </div>
             <div>
                 { createdNote && <CreateNote /> }
-                { selectedNote && <NoteDetail noteId={selectedNote} /> }
+                { selectedNote && <NoteDetail onNoteListUpdate={handleNoteListUpdate} noteId={selectedNote} /> }
             </div>
         </div>
     );

@@ -20,10 +20,11 @@ interface Note {
 };
 
 interface NoteDetailProps {
+    onNoteListUpdate: () => void;
     noteId: number;
 };
 
-const NoteDetail = ({ noteId }: NoteDetailProps) => {
+const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
     const [note, setNote] = useState<Note | null>(null);
     const [loadError, setLoadError] = useState<string | null>(null);
     const [updateError, setUpdateError] = useState<string | null>(null);
@@ -59,6 +60,7 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
 
                 await apiClient.put(`/notes/${noteId}`, updatedNote);
                 setUpdateError(null);
+                onNoteListUpdate();
             } catch (error) {
                 console.error('[ERROR] NoteDetail.tsx ::', error);
                 setUpdateError('note save failed');
@@ -98,10 +100,12 @@ const NoteDetail = ({ noteId }: NoteDetailProps) => {
                     placeholder="Note Content"
                 />
             </div>
-            <button onClick={handleUpdate}>Save</button>
-            {loadError && <p>{loadError}</p>}
-            {updateError && <p>{updateError}</p>}
-            <DeleteNote noteId={note.id} />
+            <div>
+                {loadError && <p>{loadError}</p>}
+                {updateError && <p>{updateError}</p>}
+                <button onClick={handleUpdate}>Save</button>
+                <DeleteNote noteId={note.id} />
+            </div>
         </div>
     );
 };
