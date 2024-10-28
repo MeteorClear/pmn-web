@@ -9,11 +9,13 @@ interface Note {
     title: string;
     content: string;
     createdAt: string;
+    updatedAt: string;
 }
 
 const NoteList = () => {
     const [notes, setNotes] = useState<Note[]>([]);
     const [selectedNote, setSelectedNote] = useState<number | null>(null);
+    const [createdNote, setCreatedNote] = useState<boolean>(false);
     const userId = localStorage.getItem('userId');
 
     // 노트 목록 표시
@@ -29,22 +31,42 @@ const NoteList = () => {
         fetchNotes();
     }, [userId]);
 
-    // 목록 중 클릭한 노트 번호 추출
+    const handleSelectNote = (id: number) => {
+        setCreatedNote(false);
+        setSelectedNote(id);
+    }
+
+    const handleCreateNote = () => {
+        setSelectedNote(null);
+        setCreatedNote(true);
+    }
 
     return (
         <div className={styles.container}>
             <div className={styles.noteListBox}>
                 {notes.map((note) => (
-                    <div className={styles.noteItem} key={note.id} onClick={() => setSelectedNote(note.id)}>
+                    <div 
+                        className={styles.noteItem} 
+                        key={note.id} 
+                        role='button' 
+                        onClick={() => handleSelectNote(note.id)}
+                    >
                         {note.title}
                         <br />
                         {note.createdAt}
                     </div>
                 ))}
+                <div 
+                    className={styles.noteItem} 
+                    role='button' 
+                    onClick={handleCreateNote}
+                >
+                    + Create Note
+                </div>
             </div>
             <div>
-                <CreateNote />
-                {selectedNote && <NoteDetail noteId={selectedNote} />}
+                { createdNote && <CreateNote /> }
+                { selectedNote && <NoteDetail noteId={selectedNote} /> }
             </div>
         </div>
     );
