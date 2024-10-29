@@ -6,7 +6,6 @@ interface DeleteNoteProps {
 };
 
 const DeleteNote = ({ noteId }: DeleteNoteProps ) => {
-    const [error, setError] = useState<string | null>(null);
 
     const handleDelete = async () => {
         const confirmDelete = window.confirm('Do you really want to delete?');
@@ -14,18 +13,15 @@ const DeleteNote = ({ noteId }: DeleteNoteProps ) => {
 
         try {
             await apiClient.delete(`/notes/${noteId}`);
-            setError(null);
         } catch (error_) {
-            console.error("[ERROR] DeleteNote.tsx ::", error);
-            setError("note delete failed");
+            console.error("[ERROR] DeleteNote.tsx ::", error_);
         }
     }
 
     return (
-        <div>
+        <>
             <button onClick={handleDelete}>Delete</button>
-            {error && <p>{error}</p>}
-        </div>
+        </>
     );
 };
 
