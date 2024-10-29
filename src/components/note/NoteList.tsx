@@ -44,6 +44,7 @@ const NoteList = () => {
 
     const handleNoteListUpdate = () => {
         fetchNotes();
+        setCreatedNote(false);
     }
 
     return (
