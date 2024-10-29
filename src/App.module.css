@@ -16,7 +16,7 @@
     display: flex;
     box-sizing: border-box;
     align-items: center;
-    border-bottom: 1px solid #abb0f2;
+    border-bottom: 2px solid #abb0f2;
 }
 
 .noteContainer {
