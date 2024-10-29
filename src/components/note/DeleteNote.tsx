@@ -3,10 +3,11 @@ import apiClient from "../../api/apiClient";
 import styles from './DeleteNote.module.css';
 
 interface DeleteNoteProps {
+    onNoteListUpdate: () => void;
     noteId: number;
 };
 
-const DeleteNote = ({ noteId }: DeleteNoteProps ) => {
+const DeleteNote = ({ onNoteListUpdate, noteId }: DeleteNoteProps ) => {
 
     const handleDelete = async () => {
         const confirmDelete = window.confirm('Do you really want to delete?');
@@ -14,6 +15,7 @@ const DeleteNote = ({ noteId }: DeleteNoteProps ) => {
 
         try {
             await apiClient.delete(`/notes/${noteId}`);
+            onNoteListUpdate();
         } catch (error_) {
             console.error("[ERROR] DeleteNote.tsx ::", error_);
         }
