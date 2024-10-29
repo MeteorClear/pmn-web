@@ -86,6 +86,7 @@ const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
                 value={note.title}
                 onChange={handleChange}
                 placeholder="Note title"
+                spellCheck="false"
                 required
             />
             <div className={styles.dateBox}>
@@ -98,6 +99,7 @@ const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
                 value={note.content}
                 onChange={handleChange}
                 placeholder="Note Content"
+                spellCheck="false"
             />
             <div className={styles.buttonBox}>
                 {loadError && <p>{loadError}</p>}
