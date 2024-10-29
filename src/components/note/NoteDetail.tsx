@@ -104,7 +104,7 @@ const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
             <div className={styles.buttonBox}>
                 {loadError && <p>{loadError}</p>}
                 {updateError && <p>{updateError}</p>}
-                <button onClick={handleUpdate}>Save</button>
+                <button className={styles.button} onClick={handleUpdate}>Save</button>
                 <DeleteNote noteId={note.id} />
             </div>
         </div>
