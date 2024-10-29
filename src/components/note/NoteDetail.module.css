@@ -20,6 +20,7 @@
     font-size: 110%;
     font-weight: bold;
     border-bottom: 1px solid #abb0f2;
+    outline: none;
 }
 
 .dateBox {
@@ -52,6 +53,7 @@
     background-color: black;
     color: #eeeeee;
     border: none;
+    outline: none;
 }
 
 .buttonBox {
