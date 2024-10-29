@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
 import NoteDetail from "./NoteDetail";
 import CreateNote from "./CreateNote";
@@ -18,18 +18,19 @@ const NoteList = () => {
     const [createdNote, setCreatedNote] = useState<boolean>(false);
     const userId = localStorage.getItem('userId');
 
-    // 노트 목록 표시
-    useEffect(() => {
-        const fetchNotes = async () => {
-            try {
-                const response = await apiClient.get(`/notes/user/${userId}`);
-                setNotes(response.data);
-            } catch (error) {
-                console.error('[ERROR] NoteList.tsx ::', error);
-            }
-        };
-        fetchNotes();
+    // 노트 목록 가져오기
+    const fetchNotes = useCallback(async () => {
+        try {
+            const response = await apiClient.get(`/notes/user/${userId}`);
+            setNotes(response.data);
+        } catch (error) {
+            console.error('[ERROR] NoteList.tsx ::', error);
+        }
     }, [userId]);
+
+    useEffect(() => {
+        fetchNotes();
+    }, [fetchNotes]);
 
     const handleSelectNote = (id: number) => {
         setCreatedNote(false);
@@ -42,7 +43,7 @@ const NoteList = () => {
     }
 
     const handleNoteListUpdate = () => {
-        window.location.reload();
+        fetchNotes();
     }
 
     return (
