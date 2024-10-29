@@ -55,26 +55,25 @@ const CreateNote = () => {
 
     return (
         <div>
-            <p>Create Note</p>
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type="text"
-                    name="title"
-                    value={note.title}
-                    onChange={handleChange}
-                    placeholder="Title"
-                    required
-                />
-                <textarea 
-                    name="content"
-                    value={note.content}
-                    onChange={handleChange}
-                    placeholder="Content"
-                    required
-                />
-                <button type="submit">Create</button>
-            </form>
-            {error && <p>{error}</p>}
+            <input 
+                type="text"
+                name="title"
+                value={note.title}
+                onChange={handleChange}
+                placeholder="Title"
+                required
+            />
+            <textarea 
+                name="content"
+                value={note.content}
+                onChange={handleChange}
+                placeholder="Content"
+                required
+            />
+            <div>
+                {error && <p>{error}</p>}
+                <button onClick={handleSubmit}>Create</button>
+            </div>
         </div>
     );
 };
