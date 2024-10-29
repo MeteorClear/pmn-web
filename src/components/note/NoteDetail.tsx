@@ -89,8 +89,8 @@ const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
                 required
             />
             <div className={styles.dateBox}>
-                {note.createdAt}
-                {note.updatedAt}
+                <p className={styles.createdDate}>Created: {note.createdAt}</p>
+                <p className={styles.modifiedDate}> Modefied: {note.updatedAt}</p>
             </div>
             <textarea 
                 className={styles.contentBox}
