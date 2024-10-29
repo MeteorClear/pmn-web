@@ -70,7 +70,7 @@ const NoteList = () => {
                 </div>
             </div>
             <div className={styles.noteBox}>
-                { createdNote && <CreateNote /> }
+                { createdNote && <CreateNote onNoteListUpdate={handleNoteListUpdate} /> }
                 { selectedNote && <NoteDetail onNoteListUpdate={handleNoteListUpdate} noteId={selectedNote} /> }
             </div>
         </div>

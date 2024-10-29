@@ -19,7 +19,11 @@ interface CreateNoteRequest {
     updatedAt: string;
 };
 
-const CreateNote = () => {
+interface CreateNoteProps {
+    onNoteListUpdate: () => void;
+};
+
+const CreateNote = ({ onNoteListUpdate }: CreateNoteProps ) => {
     const userId = Number(localStorage.getItem('userId'));
     const [note, setNote] = useState<CreateNoteRequest>({
         id: 0, // 초기 ID 설정
@@ -48,6 +52,7 @@ const CreateNote = () => {
         try {
             await apiClient.post(`/notes/user/${userId}`, note);
             setError(null);
+            onNoteListUpdate();
         } catch (error_) {
             console.error("[ERROR] CreateNote.tsx ::", error_);
             setError('note creation failed');
