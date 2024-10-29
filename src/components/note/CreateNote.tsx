@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import apiClient from "../../api/apiClient";
+import styles from './CreateNote.module.css';
 
 interface User {
     id: number;
@@ -54,25 +55,29 @@ const CreateNote = () => {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <input 
+                className={styles.titleBox}
                 type="text"
                 name="title"
                 value={note.title}
                 onChange={handleChange}
                 placeholder="Title"
+                spellCheck="false"
                 required
             />
             <textarea 
+                className={styles.contentBox}
                 name="content"
                 value={note.content}
                 onChange={handleChange}
                 placeholder="Content"
+                spellCheck="false"
                 required
             />
-            <div>
+            <div className={styles.buttonBox}>
                 {error && <p>{error}</p>}
-                <button onClick={handleSubmit}>Create</button>
+                <button className={styles.button} onClick={handleSubmit}>Create</button>
             </div>
         </div>
     );
