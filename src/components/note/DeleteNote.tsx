@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import apiClient from "../../api/apiClient";
+import styles from './DeleteNote.module.css';
 
 interface DeleteNoteProps {
     noteId: number;
@@ -20,7 +21,7 @@ const DeleteNote = ({ noteId }: DeleteNoteProps ) => {
 
     return (
         <>
-            <button onClick={handleDelete}>Delete</button>
+            <button className={styles.button} onClick={handleDelete}>Delete</button>
         </>
     );
 };

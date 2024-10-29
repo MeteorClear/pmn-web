@@ -1,0 +1,15 @@
+/* DeleteNote.module.css */
+
+.button {
+    padding-left: 30px;
+    padding-right: 30px;
+    cursor: pointer;
+    border: none;
+    background-color: #333333;
+    color: #abb0f2;
+}
+
+.button:hover {
+    background-color: #abb0f2;
+    color: red;
+}
