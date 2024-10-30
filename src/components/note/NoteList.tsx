@@ -57,8 +57,7 @@ const NoteList = () => {
                         role='button' 
                         onClick={() => handleSelectNote(note.id)}
                     >
-                        {note.title}
-                        <br />
+                        <p className={styles.noteTitle}>{note.title}</p>
                         {note.createdAt}
                     </div>
                 ))}
