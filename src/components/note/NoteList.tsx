@@ -50,6 +50,13 @@ const NoteList = () => {
     return (
         <div className={styles.container}>
             <div className={styles.noteListBox}>
+                <div 
+                    className={styles.noteItem} 
+                    role='button' 
+                    onClick={handleCreateNote}
+                >
+                    + Create Note
+                </div>
                 {notes.map((note) => (
                     <div 
                         className={styles.noteItem} 
@@ -61,13 +68,6 @@ const NoteList = () => {
                         {note.createdAt}
                     </div>
                 ))}
-                <div 
-                    className={styles.noteItem} 
-                    role='button' 
-                    onClick={handleCreateNote}
-                >
-                    + Create Note
-                </div>
             </div>
             <div className={styles.noteBox}>
                 { createdNote && <CreateNote onNoteListUpdate={handleNoteListUpdate} /> }
