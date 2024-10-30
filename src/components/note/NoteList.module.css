@@ -12,6 +12,7 @@
     width: 250px;
     border-right: 1px solid #abb0f2;
     box-sizing: border-box;
+    overflow-y: auto;
 }
 
 .noteItem {
