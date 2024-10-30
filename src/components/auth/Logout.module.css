@@ -1,28 +1,33 @@
 /* Logout.module.css */
 
 .container {
+    display: flex;
+    align-items: center;
+    float: left;
+
     height: 100%;
     width: 100px;
-    display: flex;
+
     box-sizing: border-box;
-    align-items: center;
+
     color: #abb0f2;
-    float: left;
-    
 }
 
 .button {
     margin-left: auto;
+    cursor: pointer;
+
     height: 100%;
     width: 100%;
-    color: #abb0f2;
+
     background-color: #333333;
     border-style: none;
-    
+
+    color: #abb0f2;
 }
 
 .button:hover {
+    cursor: pointer;
     background-color: #abb0f2;
     color: red;
-    cursor: pointer;
 }
