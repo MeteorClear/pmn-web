@@ -1,11 +1,14 @@
 /* DeleteNote.module.css */
 
 .button {
+    cursor: pointer;
+
     padding-left: 30px;
     padding-right: 30px;
-    cursor: pointer;
+    
     border: none;
     background-color: #333333;
+    
     color: #abb0f2;
 }
 

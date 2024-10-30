@@ -3,8 +3,10 @@
 .container {
     display: flex;
     flex-direction: column;
+
     width: 100%;
     height: 100%;
+
     box-sizing: border-box;
     background-color: black;
 }
@@ -12,30 +14,35 @@
 .titleBox {
     width: 100%;
     height: 60px;
-    box-sizing: border-box;
     padding-left: 15px;
+
+    box-sizing: border-box;
     background-color: black;
-    color: #eeeeee;
     border: none;
-    font-size: 110%;
-    font-weight: bold;
     border-bottom: 1px solid #abb0f2;
     outline: none;
+
+    color: #eeeeee;
+    font-size: 110%;
+    font-weight: bold;
 }
 
 .dateBox {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
     width: 100%;
     height: 30px;
-    box-sizing: border-box;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 2px;
+
+    box-sizing: border-box;
     background-color: black;
-    color: #eeeeee;
     border-bottom: 1px solid #abb0f2;
+
+    color: #eeeeee;
 }
 
 .createdDate, .modifiedDate {
@@ -44,22 +51,26 @@
 
 .contentBox {
     flex: 1;
+
     width: 100%;
-    box-sizing: border-box;
-    padding-left: 15px;
     padding-top: 10px;
+    padding-left: 15px;
     padding-right: 10px;
-    resize: none;
+
+    box-sizing: border-box;
     background-color: black;
-    color: #eeeeee;
     border: none;
     outline: none;
+    resize: none;
+
+    color: #eeeeee;
 }
 
 .buttonBox {
     display: flex;
     width: 100%;
     height: 60px;
+
     box-sizing: border-box;
     border-top: 1px solid #abb0f2;
     background-color: #333333;
@@ -67,11 +78,14 @@
 
 .button {
     margin-left: auto;
+    cursor: pointer;
+
     padding-left: 50px;
     padding-right: 50px;
-    cursor: pointer;
-    border: none;
+
     background-color: #333333;
+    border: none;
+
     color: #abb0f2;
 }
 
