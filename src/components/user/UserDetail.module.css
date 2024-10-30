@@ -1,11 +1,14 @@
 /* UserDetail.module.css */
 
 .container {
+    display: flex;
+    align-items: center;
+
     width: 100%;
     height: 100%;
-    display: flex;
+
     box-sizing: border-box;
-    align-items: center;
+    
     color: #abb0f2;
 }
 
@@ -16,17 +19,19 @@
 
 .button {
     margin-left: auto;
+    cursor: pointer;
+
     height: 100%;
     padding-left: 25px;
     padding-right: 25px;
-    color: #abb0f2;
+
     background-color: #333333;
     border-style: none;
-    
+
+    color: #abb0f2;
 }
 
 .button:hover {
     background-color: #abb0f2;
     color: #333333;
-    cursor: pointer;
 }
