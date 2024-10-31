@@ -3,6 +3,9 @@ import apiClient from "../../api/apiClient";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from './UserDetail.module.css';
 
+/**
+ * 사용자 정보 필드 정의
+ */
 interface User {
     id: number;
     email: string;
@@ -10,6 +13,13 @@ interface User {
     createdAt: string;
 };
 
+/**
+ * 사용자 세부 정보를 보여주는 컴포넌트.
+ * 사용자 정보 조회 및 변경 페이지 이동 담당.
+ * 
+ * @component
+ * @returns {JSX.Element} UserDetail 컴포넌트.
+ */
 const UserDetail = () => {
     const [user, setUser] = useState<User | null>(null);
     const userIdString = localStorage.getItem('userId');
@@ -18,6 +28,10 @@ const UserDetail = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        /**
+         * 저장된 사용자 ID를 기반으로 사용자 정보를 불러오는 함수.
+         * `/users/${userId}` 에 get 요청.
+         */
         const fetchUser = async () => {
             try {
                 const response = await apiClient.get(`/users/${userId}`);
@@ -29,6 +43,9 @@ const UserDetail = () => {
         fetchUser();
     }, [userId]);
 
+    /**
+     * 사용자 정보 수정 페이지로 이동하는 함수.
+     */
     const handleUpdateUser = () => {
         navigate(`${location.pathname}/change`);
     }
