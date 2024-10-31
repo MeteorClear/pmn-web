@@ -10,16 +10,30 @@ import UpdateUser from './components/user/UpdateUser';
 import DeleteUser from './components/user/DeleteUser';
 import styles from './App.module.css';
 
+/**
+ * 앱의 루트 컴포넌트.
+ * 인증 여부 관리 및 경로별 네이게이션 정의.
+ * 
+ * @compoent
+ * @returns {JSX.Element} 메인 App 컴포넌트.
+ */
 const App = () => {
+    // 인증 여부.
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'));
+    // 인코딩된 사용자 경로.
     const [encodedUserPath, setEncodedUserPath] = useState<string | null>(null);
 
-    // 로그인 성공시 true
+    /**
+     * 로그인 성공시 인증 상태 true.
+     */
     const handleLogin = () => {
         setIsAuthenticated(true);
     }
 
-    // 로그아웃시 false
+    /**
+     * 로그아웃시 인증 상태 false.
+     * 사용자 경로 초기화.
+     */
     const handleLogout = () => {
         setIsAuthenticated(false);
         setEncodedUserPath(null);
@@ -84,6 +98,7 @@ const App = () => {
                     }
                 />
 
+                {/* 기본 경로는 비인증시 로그인 페이지로 아닌 경우 사용자 페이지로 */}
                 <Route
                     path="/"
                     element={
