@@ -3,12 +3,22 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import styles from './Register.module.css';
 
+/**
+ * 회원가입 요청에 필요한 필드 정의.
+ */
 interface UserRegisterRequest {
     email: string;
     password: string;
     username: string;
 };
 
+/**
+ * 회원가입 컴포넌트.
+ * 회원가입 요청과 처리 담당.
+ * 
+ * @component
+ * @returns {JSX.Element} Register 컴포넌트.
+ */
 const Register = () => {
     const [user, setUser] = useState<UserRegisterRequest>({
         email: '',
@@ -18,10 +28,22 @@ const Register = () => {
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
+    /**
+     * 입력 필드의 값이 변경될 때 상태 업데이트 함수.
+     * 
+     * @param {React.ChangeEvent<HTMLInputElement>} e 입력 이벤트.
+     */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
+    /**
+     * 회원가입 요청을 처리하는 함수.
+     * '/users' 에 post 요청. 
+     * 성공시 로그인 페이지로 이동.
+     * 
+     * @param {React.FormEvent} e 폼 제출 이벤트
+     */
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -35,6 +57,7 @@ const Register = () => {
             setError(null);
             alert('register succeeded');
             navigate('/login');
+            
         } catch (error_) {
             console.error("DEBUG::Register.tsx::", error_);
             setError('register failed');
