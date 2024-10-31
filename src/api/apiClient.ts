@@ -1,13 +1,16 @@
 import axios from 'axios';
 
-// axios 설정, api 호출 처리, jwt 토큰 처리
+/**
+ * Axios 설정 및 API 호출을 위한 클라이언트.
+ * JWT 토큰을 포함한 요청 처리를 담당.
+ */
 
-// axios 클라이언트 생성
+// Axios 클라이언트 생성
 const apiClient = axios.create({
     baseURL: 'https://localhost:8443/api'
 });
 
-// http 요청에 jwt 토큰 포함
+// HTTP 요청 시 JWT 토큰을 자동으로 포함하는 인터셉터
 apiClient.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
 

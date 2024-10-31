@@ -18,9 +18,7 @@ import styles from './App.module.css';
  * @returns {JSX.Element} 메인 App 컴포넌트.
  */
 const App = () => {
-    // 인증 여부.
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'));
-    // 인코딩된 사용자 경로.
     const [encodedUserPath, setEncodedUserPath] = useState<string | null>(null);
 
     /**
