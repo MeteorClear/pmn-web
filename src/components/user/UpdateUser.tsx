@@ -71,12 +71,8 @@ const UpdateUser = () => {
      * 변경된 사용자 정보를 기반으로 변경 요청을 보내는 함수.
      * `/api/users/${user.id}` 에 put 요청.
      * 성공시 메인 페이지로 이동.
-     * 
-     * @param {React.FormEvent} e 폼 제출 이벤트.
      */
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
+    const handleSubmit = async () => {
         if (user) {
             if (!user.username || !user.password) {
                 setError('There are empty items');
