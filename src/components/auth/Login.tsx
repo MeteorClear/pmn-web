@@ -5,6 +5,9 @@ import styles from './Login.module.css';
 
 /**
  * JWT 요청에 필요한 필드 정의.
+ * 
+ * @property {string} username 사용자 이름.
+ * @property {string} password 사용자 비밀번호.
  */
 interface JwtRequest {
     username: string;
@@ -13,6 +16,9 @@ interface JwtRequest {
 
 /**
  * Login 컴포넌트의 props 정의.
+ * 
+ * @property {function} onLogin 로그인 성공여부 설정 함수.
+ * @property {function} setEncodedUserPath 인코딩된 사용자 경로 설정 함수.
  */
 interface LoginProps {
     onLogin: () => void;
@@ -35,8 +41,11 @@ const Login = ({ onLogin, setEncodedUserPath }: LoginProps) => {
     /**
      * username으로 사용자 정보를 가져오는 함수.
      * 
+     * @async
+     * @function
      * @param {string} email 사용자의 이메일 주소(로그인시 사용한 username).
      * @returns 사용자 데이터 객체.
+     * @throws 요청 실패 시 에러.
      */
     const getUserByUsername = async (email: string) => {
         try {
@@ -63,6 +72,8 @@ const Login = ({ onLogin, setEncodedUserPath }: LoginProps) => {
      * '/auth/login' 에 post 요청.
      * 성공시 메인 페이지로 이동.
      * 
+     * @async
+     * @function
      * @param {React.FormEvent} e 제출 이벤트.
      */
     const handleSubmit = async (e: React.FormEvent) => {
@@ -74,18 +85,14 @@ const Login = ({ onLogin, setEncodedUserPath }: LoginProps) => {
         }
 
         try {
-            // 로그인 시도.
             const response = await apiClient.post('/auth/login', credentials);
             localStorage.setItem('token', response.data.token);
 
-            // 로그인 성공 후 user 찾기.
             const user = await getUserByUsername(credentials.username);
             localStorage.setItem('userId', user.id);
             localStorage.setItem('userEmail', user.email);
 
-            // App.tsx 로그인 여부 설정.
             onLogin();
-
             setError(null);
             alert('login succeeded');
 
@@ -115,6 +122,7 @@ const Login = ({ onLogin, setEncodedUserPath }: LoginProps) => {
     /**
      * 문자열을 Base64로 인코딩하는 함수.
      * 
+     * @function
      * @param {string} path 인코딩할 문자열.
      * @returns {string} 인코딩된 문자열.
      */

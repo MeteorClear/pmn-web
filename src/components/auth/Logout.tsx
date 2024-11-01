@@ -4,6 +4,8 @@ import styles from './Logout.module.css';
 
 /**
  * Logout 컴포넌트의 props 정의.
+ * 
+ * @property {function} onLogout 로그아웃 성공여부 설정 함수.
  */
 interface LogoutProps {
     onLogout: () => void;
@@ -11,7 +13,7 @@ interface LogoutProps {
 
 /**
  * 로그아웃 컴포넌트.
- * 로그인 정보와 토큰 저장.
+ * 로그인 정보와 토큰 제거 및 로그아웃 처리 담당.
  * 
  * @component
  * @param {LogoutProps} props 로그아웃 기능을 포함한 props
@@ -24,6 +26,8 @@ const Logout = ({ onLogout }: LogoutProps) => {
      * 로그아웃 처리 함수.
      * 로그인시 저장된 토큰과 사용자 정보 제거.
      * 성공시 로그인 페이지로 이동.
+     * 
+     * @function
      */
     const handleLogout = () => {
         const confirmDelete = window.confirm('Do you really want to Logout?');

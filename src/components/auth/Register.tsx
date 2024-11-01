@@ -5,6 +5,10 @@ import styles from './Register.module.css';
 
 /**
  * 회원가입 요청에 필요한 필드 정의.
+ * 
+ * @property {string} email 사용자 이메일 주소.
+ * @property {string} password 사용자 비밀번호.
+ * @property {string} username 사용자 이름.
  */
 interface UserRegisterRequest {
     email: string;
@@ -42,6 +46,7 @@ const Register = () => {
      * '/users' 에 post 요청. 
      * 성공시 로그인 페이지로 이동.
      * 
+     * @async
      * @param {React.FormEvent} e 폼 제출 이벤트
      */
     const handleSubmit = async (e: React.FormEvent) => {
