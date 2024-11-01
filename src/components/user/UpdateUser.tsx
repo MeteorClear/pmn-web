@@ -28,7 +28,7 @@ interface User {
 const UpdateUser = () => {
     const [user, setUser] = useState<User | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [userId, setUserId] = useState<number | null>(null);
+    const userId = localStorage.getItem('userId') ? parseInt(localStorage.getItem('userId') as string, 10) : null;
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -38,23 +38,20 @@ const UpdateUser = () => {
          * `/users/${userId}` 에 get 요청.
          */
         const fetchUser = async () => {
-            const storedUserId = localStorage.getItem('userId')
-            if (!storedUserId) {
+            if (!userId) {
                 alert('User load failed, please relogin');
                 console.error('[ERROR] UpdateUser.tsx:: no userId found');
                 navigate('/login');
                 return;
             }
 
-            setUserId(Number(storedUserId));
-            if (userId) {
-                try {
-                    const response = await apiClient.get(`/users/${userId}`);
-                    setUser(response.data);
-                } catch (error) {
-                    console.error('[ERROR] UserDetail.tsx ::', error);
-                }
+            try {
+                const response = await apiClient.get(`/users/${userId}`);
+                setUser(response.data);
+            } catch (error) {
+                console.error('[ERROR] UserDetail.tsx ::', error);
             }
+            
         };
         fetchUser();
     }, [userId, navigate]);
