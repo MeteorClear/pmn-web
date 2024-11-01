@@ -42,7 +42,6 @@ const Login = ({ onLogin, setEncodedUserPath }: LoginProps) => {
      * username으로 사용자 정보를 가져오는 함수.
      * 
      * @async
-     * @function
      * @param {string} email 사용자의 이메일 주소(로그인시 사용한 username).
      * @returns 사용자 데이터 객체.
      * @throws 요청 실패 시 에러.
@@ -73,7 +72,6 @@ const Login = ({ onLogin, setEncodedUserPath }: LoginProps) => {
      * 성공시 메인 페이지로 이동.
      * 
      * @async
-     * @function
      */
     const handleSubmit = async () => {
         if (!credentials.username || !credentials.password) {
@@ -119,7 +117,6 @@ const Login = ({ onLogin, setEncodedUserPath }: LoginProps) => {
     /**
      * 문자열을 Base64로 인코딩하는 함수.
      * 
-     * @function
      * @param {string} path 인코딩할 문자열.
      * @returns {string} 인코딩된 문자열.
      */

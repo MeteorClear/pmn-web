@@ -26,8 +26,6 @@ const Logout = ({ onLogout }: LogoutProps) => {
      * 로그아웃 처리 함수.
      * 로그인시 저장된 토큰과 사용자 정보 제거.
      * 성공시 로그인 페이지로 이동.
-     * 
-     * @function
      */
     const handleLogout = () => {
         const confirmDelete = window.confirm('Do you really want to Logout?');
