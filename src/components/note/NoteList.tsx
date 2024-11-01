@@ -5,7 +5,13 @@ import CreateNote from "./CreateNote";
 import styles from './NoteList.module.css';
 
 /**
- * 노트 필요 필드 정의
+ * 노트 필요 필드 정의.
+ * 
+ * @property {number} id 노트 고유 번호.
+ * @property {string} title 노트 제목.
+ * @property {string} content 노트 내용.
+ * @property {string} createdAt 노트 생성일.
+ * @property {string} updatedAt 노트 수정일.
  */
 interface Note {
     id: number;
@@ -31,6 +37,8 @@ const NoteList = () => {
     /**
      * 노트 목록을 서버에서 가져오는 함수
      * `/notes/user/${userId}` 에 get 요청
+     * 
+     * @async
      */
     const fetchNotes = useCallback(async () => {
         try {

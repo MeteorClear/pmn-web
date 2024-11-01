@@ -4,6 +4,9 @@ import styles from './DeleteNote.module.css';
 
 /**
  * DeleteNote 컴포넌트의 props 정의.
+ * 
+ * @property {function} onNoteListUpdate 노트 목록 업데이트 함수.
+ * @property {number} noteId 노트 고유번호.
  */
 interface DeleteNoteProps {
     onNoteListUpdate: () => void;
@@ -23,6 +26,8 @@ const DeleteNote = ({ onNoteListUpdate, noteId }: DeleteNoteProps ) => {
     /**
      * noteId 에 해당하는 노트 삭제 함수.
      * `/notes/${noteId}` 에 delete 요청.
+     * 
+     * @async
      */
     const handleDelete = async () => {
         const confirmDelete = window.confirm('Do you really want to delete?');

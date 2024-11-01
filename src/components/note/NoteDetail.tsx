@@ -4,7 +4,13 @@ import DeleteNote from "./DeleteNote";
 import styles from './NoteDetail.module.css';
 
 /**
- * 사용자 필요 필드 정의
+ * 사용자 필요 필드 정의.
+ * 
+ * @property {number} id 사용자 고유번호.
+ * @property {string} email 사용자 이메일.
+ * @property {string} password 사용자 비밀번호.
+ * @property {string} username 사용자 닉네임.
+ * @property {string} createdAt 사용자 계정 생성일.
  */
 interface User {
     id: number;
@@ -15,7 +21,14 @@ interface User {
 }
 
 /**
- * 노트 필요 필드 정의
+ * 노트 필요 필드 정의.
+ * 
+ * @property {number} id 노트 고유 번호.
+ * @property {User} user 노트 소유 사용자.
+ * @property {string} title 노트 제목.
+ * @property {string} content 노트 내용.
+ * @property {string} createdAt 노트 생성일.
+ * @property {string} updatedAt 노트 수정일.
  */
 interface Note {
     id: number;
@@ -28,6 +41,9 @@ interface Note {
 
 /**
  * NoteDetail 컴포넌트의 props 정의.
+ * 
+ * @property {function} onNoteListUpdate 노트 목록 업데이트 함수.
+ * @property {number} noteId 노트 고유번호.
  */
 interface NoteDetailProps {
     onNoteListUpdate: () => void;
@@ -51,6 +67,8 @@ const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
         /**
          * props의 노트 ID를 기반으로 노트 정보를 불러오는 함수.
          * `/notes/${noteId}` 에 get 요청.
+         * 
+         * @async
          */
         const fetchNote = async () => {
             try {
@@ -80,6 +98,8 @@ const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
      * 노트 업데이트 함수.
      * 변경된 내용을 기반으로 노트 정보 업데이트.
      * `/notes/${noteId}` 에 put 요청.
+     * 
+     * @async
      */
     const handleUpdate = async () => {
         if (note) {

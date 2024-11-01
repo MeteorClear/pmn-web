@@ -3,7 +3,13 @@ import apiClient from "../../api/apiClient";
 import styles from './CreateNote.module.css';
 
 /**
- * 사용자 필요 필드 정의
+ * 사용자 필요 필드 정의.
+ * 
+ * @property {number} id 사용자 고유번호.
+ * @property {string} email 사용자 이메일.
+ * @property {string} password 사용자 비밀번호.
+ * @property {string} username 사용자 닉네임.
+ * @property {string} createdAt 사용자 계정 생성일.
  */
 interface User {
     id: number;
@@ -14,7 +20,14 @@ interface User {
 }
 
 /**
- * 노트 생성 요청 필요 필드 정의
+ * 노트 생성 요청 필요 필드 정의.
+ * 
+ * @property {number} id 노트 고유 번호.
+ * @property {User} user 노트 소유 사용자.
+ * @property {string} title 노트 제목.
+ * @property {string} content 노트 내용.
+ * @property {string} createdAt 노트 생성일.
+ * @property {string} updatedAt 노트 수정일.
  */
 interface CreateNoteRequest {
     id: number;
@@ -27,6 +40,8 @@ interface CreateNoteRequest {
 
 /**
  * CreateNote 컴포넌트의 props 정의.
+ * 
+ * @property {function} onNoteListUpdate 노트 목록 업데이트 함수.
  */
 interface CreateNoteProps {
     onNoteListUpdate: () => void;
@@ -72,6 +87,7 @@ const CreateNote = ({ onNoteListUpdate }: CreateNoteProps ) => {
      * 입력된 내용을 기반으로 노트 생성 요청.
      * `/notes/user/${userId}` 에 post 요청.
      * 
+     * @async
      * @param {React.FormEvent} e 폼 이벤트.
      */
     const handleSubmit = async (e: React.FormEvent) => {
