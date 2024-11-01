@@ -45,6 +45,8 @@ const UpdateUser = () => {
         /**
          * 저장된 사용자 ID를 기반으로 사용자 정보를 불러오는 함수.
          * `/users/${userId}` 에 get 요청.
+         * 
+         * @async
          */
         const fetchUser = async () => {
             if (!userId) {
@@ -78,6 +80,8 @@ const UpdateUser = () => {
      * 변경된 사용자 정보를 기반으로 변경 요청을 보내는 함수.
      * `/api/users/${user.id}` 에 put 요청.
      * 성공시 메인 페이지로 이동.
+     * 
+     * @async
      */
     const handleSubmit = async () => {
         if (!user) {

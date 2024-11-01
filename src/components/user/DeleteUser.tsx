@@ -20,6 +20,8 @@ const DeleteUser = () => {
         /**
          * 저장된 사용자 ID를 불러오는 함수.
          * 정보가 없는 경우 로그인 페이지로 이동.
+         * 
+         * @async
          */
         const fetchUser = async () => {
             const storedUserId = localStorage.getItem('userId')
@@ -38,6 +40,8 @@ const DeleteUser = () => {
     /**
      * 삭제 요청 처리 함수.
      * `/users/${userId}` 에 delete 요청.
+     * 
+     * @async
      */
     const handleDelete = async () => {
         const confirmDelete = window.confirm('Do you really want to delete?');

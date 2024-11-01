@@ -35,6 +35,8 @@ const UserDetail = () => {
         /**
          * 저장된 사용자 ID를 기반으로 사용자 정보를 불러오는 함수.
          * `/users/${userId}` 에 get 요청.
+         * 
+         * @async
          */
         const fetchUser = async () => {
             try {
