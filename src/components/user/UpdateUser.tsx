@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import apiClient from "../../api/apiClient";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from './UpdateUser.module.css';
@@ -32,6 +32,15 @@ const UpdateUser = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
+    /**
+     * 사용자 ID를 찾을 수 없는 경우 로그인 페이지로 보내는 함수.
+     */
+    const handleUnknownUser = useCallback(() => {
+        alert('User load failed, please relogin');
+        console.error('[ERROR] UpdateUser.tsx:: no userId found');
+        navigate('/login');
+    }, [navigate]);
+
     useEffect(() => {
         /**
          * 저장된 사용자 ID를 기반으로 사용자 정보를 불러오는 함수.
@@ -39,9 +48,7 @@ const UpdateUser = () => {
          */
         const fetchUser = async () => {
             if (!userId) {
-                alert('User load failed, please relogin');
-                console.error('[ERROR] UpdateUser.tsx:: no userId found');
-                navigate('/login');
+                handleUnknownUser();
                 return;
             }
 
@@ -54,7 +61,7 @@ const UpdateUser = () => {
             
         };
         fetchUser();
-    }, [userId, navigate]);
+    }, [userId, handleUnknownUser]);
 
     /**
      * 입력 필드의 값이 변경될 때 상태 업데이트 함수.
@@ -73,21 +80,24 @@ const UpdateUser = () => {
      * 성공시 메인 페이지로 이동.
      */
     const handleSubmit = async () => {
-        if (user) {
-            if (!user.username || !user.password) {
-                setError('There are empty items');
-                return;
-            }
+        if (!user) {
+            handleUnknownUser();
+            return;
+        }
 
-            try {
-                await apiClient.put(`/api/users/${user.id}`, user);
-                setError(null);
+        if (!user.username || !user.password) {
+            setError('There are empty items');
+            return;
+        }
 
-                handleBackToMain();
-            } catch (error_) {
-                console.error("[ERROR] UpdateUser.tsx ::", error);
-                setError("user info update failed");
-            }
+        try {
+            await apiClient.put(`/api/users/${user.id}`, user);
+            setError(null);
+
+            handleBackToMain();
+        } catch (error_) {
+            console.error("[ERROR] UpdateUser.tsx ::", error);
+            setError("user info update failed");
         }
     };
 
