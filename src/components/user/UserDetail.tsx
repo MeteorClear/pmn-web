@@ -5,6 +5,11 @@ import styles from './UserDetail.module.css';
 
 /**
  * 사용자 정보 필드 정의
+ * 
+ * @property {string} id 사용자 고유번호.
+ * @property {string} email 사용자 이메일.
+ * @property {string} username 사용자 닉네임.
+ * @property {string} createdAt 사용자 계성 생성일.
  */
 interface User {
     id: number;
@@ -22,8 +27,7 @@ interface User {
  */
 const UserDetail = () => {
     const [user, setUser] = useState<User | null>(null);
-    const userIdString = localStorage.getItem('userId');
-    const userId = userIdString ? parseInt(userIdString, 10) : null;
+    const userId = localStorage.getItem('userId') ? parseInt(localStorage.getItem('userId') as string, 10) : null;
     const location = useLocation();
     const navigate = useNavigate();
 
