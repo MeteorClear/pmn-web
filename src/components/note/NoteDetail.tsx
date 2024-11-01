@@ -3,6 +3,9 @@ import apiClient from "../../api/apiClient";
 import DeleteNote from "./DeleteNote";
 import styles from './NoteDetail.module.css';
 
+/**
+ * 사용자 필요 필드 정의
+ */
 interface User {
     id: number;
     email: string;
@@ -11,6 +14,9 @@ interface User {
     createdAt: string;
 }
 
+/**
+ * 노트 필요 필드 정의
+ */
 interface Note {
     id: number;
     user: User;
@@ -20,18 +26,32 @@ interface Note {
     updatedAt: string;
 };
 
+/**
+ * NoteDetail 컴포넌트의 props 정의.
+ */
 interface NoteDetailProps {
     onNoteListUpdate: () => void;
     noteId: number;
 };
 
+/**
+ * NoteDetail 컴포넌트.
+ * 선택된 노트의 상세 정보를 표시 및 수정, 삭제 기능 담당.
+ *
+ * @component
+ * @param {NoteDetailProps} props 노트 리스트 업데이트 함수와 선택된 노트 ID를 포함.
+ * @returns {JSX.Element} NoteDetail 컴포넌트.
+ */
 const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
     const [note, setNote] = useState<Note | null>(null);
     const [loadError, setLoadError] = useState<string | null>(null);
     const [updateError, setUpdateError] = useState<string | null>(null);
 
-    // 노트 정보 Fetch
     useEffect(() => {
+        /**
+         * props의 노트 ID를 기반으로 노트 정보를 불러오는 함수.
+         * `/notes/${noteId}` 에 get 요청.
+         */
         const fetchNote = async () => {
             try {
                 const respnse = await apiClient.get(`/notes/${noteId}`);
@@ -45,12 +65,22 @@ const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
         fetchNote();
     }, [noteId]);
 
+    /**
+     * 입력 필드의 값이 변경될 때 상태 업데이트 함수.
+     * 
+     * @param {React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} e 입력값 변경 이벤트.
+     */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         if (note) {
             setNote({ ...note, [e.target.name]: e.target.value });
         }
     };
 
+    /**
+     * 노트 업데이트 함수.
+     * 변경된 내용을 기반으로 노트 정보 업데이트.
+     * `/notes/${noteId}` 에 put 요청.
+     */
     const handleUpdate = async () => {
         if (note) {
             try {
@@ -61,6 +91,8 @@ const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
 
                 await apiClient.put(`/notes/${noteId}`, updatedNote);
                 setUpdateError(null);
+                
+                // NoteList.tsx 노트 목록 업데이트
                 onNoteListUpdate();
             } catch (error) {
                 console.error('[ERROR] NoteDetail.tsx ::', error);
