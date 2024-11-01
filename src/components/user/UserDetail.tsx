@@ -6,7 +6,7 @@ import styles from './UserDetail.module.css';
 /**
  * 사용자 정보 필드 정의
  * 
- * @property {string} id 사용자 고유번호.
+ * @property {number} id 사용자 고유번호.
  * @property {string} email 사용자 이메일.
  * @property {string} username 사용자 닉네임.
  * @property {string} createdAt 사용자 계성 생성일.
