@@ -88,11 +88,8 @@ const CreateNote = ({ onNoteListUpdate }: CreateNoteProps ) => {
      * `/notes/user/${userId}` 에 post 요청.
      * 
      * @async
-     * @param {React.FormEvent} e 폼 이벤트.
      */
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
+    const handleSubmit = async () => {
         try {
             await apiClient.post(`/notes/user/${userId}`, note);
             setError(null);
