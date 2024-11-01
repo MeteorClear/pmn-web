@@ -102,23 +102,27 @@ const NoteDetail = ({ onNoteListUpdate, noteId }: NoteDetailProps) => {
      * @async
      */
     const handleUpdate = async () => {
-        if (note) {
-            try {
-                const updatedNote = {
-                    ...note,
-                    updatedAt: new Date().toISOString(),
-                };
-
-                await apiClient.put(`/notes/${noteId}`, updatedNote);
-                setUpdateError(null);
-                
-                // NoteList.tsx 노트 목록 업데이트
-                onNoteListUpdate();
-            } catch (error) {
-                console.error('[ERROR] NoteDetail.tsx ::', error);
-                setUpdateError('note save failed');
-            }
+        if (!note) {
+            setUpdateError('note not found');
+            return;
         }
+
+        try {
+            const updatedNote = {
+                ...note,
+                updatedAt: new Date().toISOString(),
+            };
+
+            await apiClient.put(`/notes/${noteId}`, updatedNote);
+            setUpdateError(null);
+            
+            // NoteList.tsx 노트 목록 업데이트
+            onNoteListUpdate();
+        } catch (error) {
+            console.error('[ERROR] NoteDetail.tsx ::', error);
+            setUpdateError('note save failed');
+        }
+        
     }
 
     if (!note) {
