@@ -47,11 +47,8 @@ const Register = () => {
      * 성공시 로그인 페이지로 이동.
      * 
      * @async
-     * @param {React.FormEvent} e 폼 제출 이벤트
      */
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
+    const handleSubmit = async () => {
         if (!user.email || !user.password || !user.username) {
             setError('There are empty items');
             return;

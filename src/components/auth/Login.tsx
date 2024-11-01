@@ -74,11 +74,8 @@ const Login = ({ onLogin, setEncodedUserPath }: LoginProps) => {
      * 
      * @async
      * @function
-     * @param {React.FormEvent} e 제출 이벤트.
      */
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
+    const handleSubmit = async () => {
         if (!credentials.username || !credentials.password) {
             setError('There are empty items');
             return;
